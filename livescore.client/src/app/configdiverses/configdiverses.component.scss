@@ -1,0 +1,189 @@
+/* Fond du terrain */
+
+
+
+/* Titre de la configuration */
+.config-title {
+  margin-bottom: 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem; /* Plus grand */
+    font-weight: bold;
+    color: #003366; /* Bleu foncé */
+  }
+}
+
+/* Bouton de sauvegarde */
+.save-config {
+  margin-top: 30px;
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+}
+
+/* Fond du terrain */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/terrainBasket.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Conteneur principal */
+.config-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Section des terrains */
+.terrains-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  z-index: 15;
+}
+
+.terrain {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  z-index: 15;
+}
+
+/* Les flèches et conteneurs */
+.arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 20;
+}
+
+.arrow-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 5px 10px;
+}
+
+.team-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  z-index: 20;
+}
+
+/* Style pour la flèche gauche */
+.left-arrow {
+  .arrow {
+    width: 60px;
+    height: 20px;
+    background-color: #ff9800;
+    position: relative;
+    margin-right: 10px;
+    transform: rotate(180deg);
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: -10px;
+      width: 0;
+      height: 0;
+      border-left: 20px solid #ff9800;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+    }
+  }
+}
+
+/* Style pour la flèche droite */
+.right-arrow {
+  .arrow {
+    width: 60px;
+    height: 20px;
+    background-color: #2196f3;
+    position: relative;
+    margin-left: 10px;
+    transform: rotate(0deg);
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: -10px;
+      width: 0;
+      height: 0;
+      border-left: 20px solid #2196f3;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+    }
+  }
+}
+
+/* Bouton "Inverser" */
+.invert-button-container {
+  text-align: center;
+  margin: 0 20px;
+  z-index: 20;
+}
+
+.invert-button-container button {
+  background-color: #212121;
+  color: white;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Configuration des équipes */
+.team-config {
+  margin-top: 20px;
+  z-index: 20;
+}
+
+.team-config-item {
+  margin: 10px 0;
+}
+
+
+

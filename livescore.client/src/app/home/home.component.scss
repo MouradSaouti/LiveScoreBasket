@@ -1,0 +1,140 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1e88e5; // Material light blue
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  .navbar-left {
+    .brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        color: #bbdefb; // Lighter blue on hover
+      }
+    }
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px; // Space between buttons
+
+    button {
+      font-size: 1rem;
+      padding: 8px 12px;
+      border-radius: 4px;
+      background: none;
+      border: 1px solid transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #1565c0; // Darker blue on hover
+        border-color: #bbdefb; // Light blue border
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 5px #bbdefb; // Light blue focus outline
+      }
+    }
+
+    .logout-button {
+      background-color: #e53935; // Red background for logout
+      border: 1px solid #e53935;
+
+      &:hover {
+        background-color: #b71c1c; // Darker red on hover
+      }
+    }
+  }
+}
+
+.container {
+  padding: 20px;
+  background-color: #f1f8ff; // Subtle light background
+  color: #1565c0; // Dark blue text
+  min-height: 100vh;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0d47a1; // Darker blue for title
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 3px solid #42a5f5; // Light blue border
+    padding-bottom: 10px;
+  }
+
+  .list-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+
+    .list-group-item {
+      background-color: #bbdefb; // Light blue card background
+      border: 1px solid #90caf9; // Light blue border
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+      }
+
+      h3 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #0d47a1; // Dark blue for titles
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #1565c0; // Blue for details
+        margin-bottom: 5px;
+
+        strong {
+          font-weight: bold;
+          color: #0d47a1;
+        }
+      }
+
+      .btn-primary {
+        background-color: #1565c0;
+        border: 1px solid #0d47a1;
+        color: white;
+        padding: 8px 12px;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0d47a1;
+        }
+      }
+    }
+  }
+
+  .no-data-message {
+    font-size: 1.2rem;
+    color: #90caf9; // Light blue for no data message
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+  }
+}

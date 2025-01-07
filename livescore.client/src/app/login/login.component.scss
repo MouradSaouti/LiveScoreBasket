@@ -1,0 +1,72 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa; /* Couleur de fond similaire à la classe .container */
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.login-header {
+  background-color: #007bff; /* Couleur primaire */
+  color: white;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+
+  .mat-form-field-label {
+    font-size: 1rem;
+    color: #343a40; /* Couleur du texte */
+  }
+
+  .mat-input-element {
+    font-size: 1rem;
+  }
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff; /* Couleur primaire */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3; /* Couleur plus foncée au survol */
+  }
+
+  &:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+}
+
+.error-message {
+  color: #f44336;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}

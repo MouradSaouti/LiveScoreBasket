@@ -1,0 +1,51 @@
+<div class="background"></div>
+<div class="config-container">
+  <!-- Titre -->
+  <div class="config-title">
+    <h2>Paramétrer le sens de l'attaque :</h2>
+  </div>
+  <!-- Section des terrains -->
+  <div class="terrains-section">
+    <!-- Terrain gauche -->
+    <div class="terrain">
+      <div class="arrow-container">
+        <span class="arrow-box left-arrow">
+          <span class="team-number">123</span>
+          <div class="arrow"></div>
+        </span>
+      </div>
+    </div>
+
+    <!-- Bouton "Inverser" au centre -->
+    <div class="invert-button-container">
+      <button mat-raised-button color="primary" (click)="invertTeams()">
+        <mat-icon>swap_horiz</mat-icon>
+        Inverser
+      </button>
+    </div>
+
+    <!-- Terrain droit -->
+    <div class="terrain">
+      <div class="arrow-container">
+        <span class="arrow-box right-arrow">
+          <span class="team-number">321</span>
+          <div class="arrow"></div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configuration des équipes -->
+  <div class="team-config">
+    <label for="homeTeam">Définir Equipe Domicile et Equipe Visiteuse :</label>
+    <div class="team-config-item">
+      <input matInput id="homeTeam" type="number" [(ngModel)]="homeTeamNumber" />
+    </div>
+    <div class="team-config-item">
+      <input matInput id="visitorTeam" type="number" [(ngModel)]="visitorTeamNumber" />
+    </div>
+  </div>
+  <div class="save-config">
+    <button mat-raised-button color="primary" (click)="saveConfig()">Enregistrer la configuration</button>
+  </div>
+</div>

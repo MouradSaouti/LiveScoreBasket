@@ -1,0 +1,59 @@
+<mat-toolbar color="primary" class="navbar">
+  <!-- Barre de navigation -->
+  <div class="navbar-left">
+    <a mat-button routerLink="/" class="brand">LiveScore</a>
+  </div>
+
+  <div class="navbar-right">
+    <!-- Boutons basés sur les rôles utilisateur -->
+    <div class="role-actions">
+      <button *ngIf="userRole === 'Admin'" (click)="team()">Créer une équipe</button>
+      <button *ngIf="userRole === 'Admin'" (click)="player()">Créer un joueur</button>
+      <button *ngIf="userRole === 'Admin' || userRole === 'Preparateur'" (click)="config()">Créer une configuration</button>
+      <button class="logout-button" (click)="logout()">Déconnexion</button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!-- Conteneur principal -->
+<div class="container">
+  <!-- Titre principal -->
+  <h1 class="text-center">Liste des Configurations de Match</h1>
+
+  <!-- Liste des configurations -->
+  <div *ngIf="matchConfigurations.length > 0; else noConfig">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let config of matchConfigurations">
+        <!-- Nom du match -->
+        <h3>{{ config.nomMatch }}</h3>
+
+        <!-- Détails du match -->
+        <p>
+          <strong>Date et Heure :</strong> {{ config.dateHeure | date:'short' }}<br />
+          <strong>Nombre de quart-temps :</strong> {{ config.nombreQuartTemps }}<br />
+          <strong>Durée des quart-temps :</strong> {{ config.dureeQuartTemps }} minutes<br />
+        </p>
+
+       
+        <div class="actions">
+          <button class="btn btn-primary"
+                  *ngIf="userRole === 'Admin' || userRole === 'Preparateur'"
+                  (click)="startMatch(config)">
+            Commencer le Match
+          </button>
+          <button class="btn btn-secondary"
+                  *ngIf="userRole === 'Spectateur'"
+                  (click)="viewMatch(config)">
+            Voir le Match
+          </button>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
+  <!-- Message si aucune configuration n'est disponible -->
+  <ng-template #noConfig>
+    <p class="text-center no-data-message">Aucune configuration de match disponible.</p>
+  </ng-template>
+</div>

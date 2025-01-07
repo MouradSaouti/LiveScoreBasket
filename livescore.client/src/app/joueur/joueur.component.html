@@ -1,0 +1,61 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="navbar-left">
+    <a mat-button routerLink="/" class="brand">LiveScore</a>
+  </div>
+  <div class="navbar-right">
+    <button mat-button (click)="logout()" class="logout-button">Logout</button>
+  </div>
+</mat-toolbar>
+
+<div class="container">
+  <h2>Ajouter des joueurs</h2>
+
+  <div class="form-group">
+    <label for="teamSelect">Sélectionner une équipe</label>
+    <select id="teamSelect" class="form-control" [(ngModel)]="selectedTeamId">
+      <option *ngFor="let team of teams" [value]="team.id">{{ team.nom }}</option>
+    </select>
+  </div>
+
+  <form [formGroup]="formJoueur" (ngSubmit)="submitPlayer()">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input id="nom" formControlName="nom" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input id="prenom" formControlName="prenom" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="taille">Taille</label>
+      <input id="taille" formControlName="taille" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="numero">Numéro</label>
+      <input id="numero" formControlName="numero" type="number" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input id="position" formControlName="position" type="text" class="form-control" />
+    </div>
+    <div class="form-check">
+      <input id="estCapitaine" formControlName="estCapitaine" type="checkbox" class="form-check-input" />
+      <label for="estCapitaine" class="form-check-label">Est Capitaine</label>
+    </div>
+    <div class="form-check">
+      <input id="estEnJeu" formControlName="estEnJeu" type="checkbox" class="form-check-input" />
+      <label for="estEnJeu" class="form-check-label">Est En Jeu</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter Joueur</button>
+  </form>
+
+  <h4>Liste des joueurs</h4>
+  <ul>
+    <li *ngFor="let player of players; let i = index">
+      {{ player.nom }} {{ player.prenom }} - {{ player.position }}
+      <button (click)="removePlayer(i)" class="btn btn-danger btn-sm">Supprimer</button>
+    </li>
+  </ul>
+
+  <button (click)="submitAllPlayers()" class="btn btn-success mt-4">Soumettre Tous les Joueurs</button>
+</div>

@@ -1,0 +1,47 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="navbar-left">
+    <a mat-button routerLink="/" class="brand">LiveScore</a>
+  </div>
+  <div class="navbar-right">
+    <button mat-button (click)="logout()" class="logout-button">Logout</button>
+  </div>
+</mat-toolbar>
+
+<div class="container">
+  <h2>Configurer un match</h2>
+  <form [formGroup]="matchForm" (ngSubmit)="createConfiguration()">
+    <div class="form-group">
+      <label for="nomMatch">Nom du Match</label>
+      <input id="nomMatch" formControlName="nomMatch" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="dateHeure">Date et Heure</label>
+      <input id="dateHeure" formControlName="dateHeure" type="datetime-local" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="nombreQuartTemps">Nombre de Quart-Temps</label>
+      <input id="nombreQuartTemps" formControlName="nombreQuartTemps" type="number" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="dureeQuartTemps">Durée Quart-Temps (minutes)</label>
+      <input id="dureeQuartTemps" formControlName="dureeQuartTemps" type="number" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="dureeTimeout">Durée Timeout (secondes)</label>
+      <input id="dureeTimeout" formControlName="dureeTimeout" type="number" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="equipeDomicileId">Équipe Domicile</label>
+      <select id="equipeDomicileId" formControlName="equipeDomicileId" class="form-control">
+        <option *ngFor="let team of teams" [value]="team.id">{{ team.nom }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="equipeExterieurId">Équipe Extérieur</label>
+      <select id="equipeExterieurId" formControlName="equipeExterieurId" class="form-control">
+        <option *ngFor="let team of teams" [value]="team.id">{{ team.nom }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Créer la configuration</button>
+  </form>
+</div>

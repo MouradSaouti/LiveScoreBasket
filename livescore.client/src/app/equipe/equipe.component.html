@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="navbar-left">
+    <a mat-button routerLink="/" class="brand">LiveScore</a>
+  </div>
+  <div class="navbar-right">
+    <button mat-button (click)="logout()" class="logout-button">Logout</button>
+  </div>
+</mat-toolbar>
+
+<div class="container">
+  <h1 class="titre">Créer une équipe</h1>
+  <p class="info">
+    Entrez toutes les informations en dessous. <strong>*</strong> indique un champ obligatoire.
+  </p>
+
+  <form [formGroup]="teamForm">
+    <div class="team-section">
+      <h2>Informations Équipe</h2>
+      <div class="form-group">
+        <label for="team-name">* Nom :</label>
+        <input type="text" id="team-name" formControlName="nom" required>
+      </div>
+      <div class="form-group">
+        <label for="team-code">* Code :</label>
+        <input type="text" id="team-code" formControlName="code" required>
+      </div>
+      <div class="staff">
+        <h3>Entraîneur</h3>
+        <div class="role">
+          <label>* Nom de l'entraîneur :</label>
+          <input type="text" formControlName="coachNom" placeholder="Nom" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <button type="button" mat-raised-button color="primary" (click)="submitTeam()" [disabled]="!teamForm.valid">
+        Enregistrer l'équipe
+      </button>
+    </div>
+  </form>
+</div>

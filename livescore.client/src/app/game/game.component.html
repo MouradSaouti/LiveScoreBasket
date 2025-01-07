@@ -1,0 +1,152 @@
+<div class="game-container">
+  <h1>
+    Match: {{ equipeDomicile?.nom || 'Équipe Domicile' }} vs {{ equipeExterieur?.nom || 'Équipe Extérieure' }}
+  </h1>
+
+  <!-- Timeout Section -->
+  <div class="timeout-section">
+    <h3>Timeout</h3>
+    <button (click)="startTimeout()" [disabled]="timeoutActive">Demander un timeout</button>
+    <p *ngIf="timeoutRemaining > 0">
+      Timeout en cours : {{ formatTime(timeoutRemaining) }}
+    </p>
+  </div>
+
+  <!-- Teams Section -->
+  <div class="teams">
+    <div class="team">
+      <h2>Équipe Domicile: {{ equipeDomicile?.nom || 'Non disponible' }}</h2>
+      <ul>
+        <li *ngFor="let joueur of joueursDomicile"
+            [class.selected]="selectedPlayerId === joueur.id"
+            (click)="selectedPlayerId = joueur.id"
+            [class.disabled]="timeoutActive">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </li>
+      </ul>
+    </div>
+    <div class="chrono">
+      <h3>Chronomètre</h3>
+      <p><strong>Temps restant :</strong> {{ formatTime(timeRemaining) }}</p>
+      <p><strong>Quart-temps actuel :</strong> {{ currentQuarter }}</p>
+      <button (click)="startChrono()" [disabled]="timeoutActive || loading">Démarrer</button>
+      <button (click)="stopChrono()" [disabled]="timeoutActive || loading">Arrêter</button>
+      <button (click)="nextQuarter()" [disabled]="timeoutActive">Next Quarter</button>
+    </div>
+
+    <div class="team">
+      <h2>Équipe Extérieure: {{ equipeExterieur?.nom || 'Non disponible' }}</h2>
+      <ul>
+        <li *ngFor="let joueur of joueursExterieur"
+            [class.selected]="selectedPlayerId === joueur.id"
+            (click)="selectedPlayerId = joueur.id"
+            [class.disabled]="timeoutActive">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Scores Section -->
+  <div class="scores">
+    <h3>Scores</h3>
+    <p><strong>Domicile:</strong> {{ currentScore?.home || 0 }}</p>
+    <p><strong>Extérieur:</strong> {{ currentScore?.away || 0 }}</p>
+  </div>
+
+  <!-- Actions Section -->
+  <div class="actions">
+    <h3>Actions</h3>
+    <button (click)="updateScore('home', 1)" [disabled]="timeoutActive">+1 Domicile</button>
+    <button (click)="updateScore('away', 1)" [disabled]="timeoutActive">+1 Extérieur</button>
+    <button (click)="updateScore('home', 2)" [disabled]="timeoutActive">+2 Domicile</button>
+    <button (click)="updateScore('away', 2)" [disabled]="timeoutActive">+2 Extérieur</button>
+    <button (click)="updateScore('home', 3)" [disabled]="timeoutActive">+3 Domicile</button>
+    <button (click)="updateScore('away', 3)" [disabled]="timeoutActive">+3 Extérieur</button>
+  </div>
+
+  <!-- Faute Section -->
+  <div class="faute-section">
+    <h3>Enregistrer une faute</h3>
+    <label for="joueur-fautif">Joueur fautif:</label>
+    <select id="joueur-fautif" [(ngModel)]="selectedPlayerId" [disabled]="timeoutActive">
+      <optgroup label="Équipe Domicile">
+        <option *ngFor="let joueur of joueursDomicile" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+      <optgroup label="Équipe Extérieure">
+        <option *ngFor="let joueur of joueursExterieur" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+    </select>
+
+    <label for="joueur-victime">Joueur victime:</label>
+    <select id="joueur-victime" [(ngModel)]="selectedVictimeId" (ngModelChange)="onVictimeIdChange($event)" [disabled]="timeoutActive">
+      <optgroup label="Équipe Domicile">
+        <option *ngFor="let joueur of joueursDomicile" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+      <optgroup label="Équipe Extérieure">
+        <option *ngFor="let joueur of joueursExterieur" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+    </select>
+
+
+    <label for="type-faute">Type de faute:</label>
+    <select id="type-faute" [(ngModel)]="selectedTypeFaute" [disabled]="timeoutActive">
+      <option value="P0">P0</option>
+      <option value="P1">P1</option>
+      <option value="P2">P2</option>
+      <option value="P3">P3</option>
+    </select>
+
+    <button (click)="enregistrerFaute()">Enregistrer faute</button>
+  </div>
+
+  <!-- Changement Section -->
+  <div class="changement-section">
+    <h3>Changement de joueur</h3>
+    <label for="joueur-sortant">Joueur sortant :</label>
+    <select id="joueur-sortant" [(ngModel)]="joueurSortantId" [disabled]="timeoutActive">
+      <optgroup label="Équipe Domicile">
+        <option *ngFor="let joueur of joueursDomicile" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+      <optgroup label="Équipe Extérieure">
+        <option *ngFor="let joueur of joueursExterieur" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+    </select>
+
+    <label for="joueur-entrant">Joueur entrant :</label>
+    <select id="joueur-entrant" [(ngModel)]="joueurEntrantId" [disabled]="timeoutActive">
+      <optgroup label="Équipe Domicile">
+        <option *ngFor="let joueur of joueursDomicile" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+      <optgroup label="Équipe Extérieure">
+        <option *ngFor="let joueur of joueursExterieur" [value]="joueur.id">
+          {{ joueur.nom }} (#{{ joueur.numero }})
+        </option>
+      </optgroup>
+    </select>
+
+    <button (click)="changerJoueur(joueurSortantId, joueurEntrantId)" [disabled]="timeoutActive">Confirmer le changement</button>
+  </div>
+
+  <!-- Logs Section -->
+  <div class="logs">
+    <h3>Faits du match</h3>
+    <div class="log-entry" *ngFor="let log of logs; let i = index">
+      {{ i + 1 }}. {{ log }}
+    </div>
+  </div>
+</div>

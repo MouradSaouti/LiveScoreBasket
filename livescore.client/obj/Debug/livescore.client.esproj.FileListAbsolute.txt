@@ -1,0 +1,1 @@
+C:\Users\MSaou\dotnet IV\LiveScore\livescore.client\obj\Debug\livescore.client.esproj.CoreCompileInputs.cache

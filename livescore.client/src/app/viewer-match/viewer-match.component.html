@@ -1,0 +1,12 @@
+<h1>
+  Match: {{ equipeDomicile?.nom || 'Équipe Domicile' }} vs {{ equipeExterieur?.nom || 'Équipe Extérieure' }}
+</h1>
+<p><strong>Temps restant :</strong> {{ formatTime(timeRemaining) }}</p>
+
+
+<div class="logs">
+  <h3>Faits du match</h3>
+  <div class="log-entry" *ngFor="let log of logs; let i = index">
+    {{ i + 1 }}. {{ log }}
+  </div>
+</div>
